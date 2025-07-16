@@ -1,5 +1,7 @@
 import 'package:bloc_course/bloc/counterbloc/counter_bloc.dart';
+import 'package:bloc_course/bloc/switchbloc/switch_bloc.dart';
 import 'package:bloc_course/view/counter_screen/counter_screen.dart';
+import 'package:bloc_course/view/switch_screen/switch_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +21,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterBloc(),
-      child: MaterialApp(title: 'Material App', home: CounterScreen()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => CounterBloc()),
+        BlocProvider(create: (_) => SwitchBloc()),
+      ],
+      child: MaterialApp(title: 'Material App', home: SwitchScreen()),
     );
   }
 }
